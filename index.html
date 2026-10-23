@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A reading group on A Mathematical Introduction to Diffusion Models, Nov 2026 – Feb 2027, organized by Curtis McDonald and Dhruv Rohatgi.">
+<title>Diffusion Models Reading Group</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column; the hero is a live reverse-diffusion of particles from noise to data; the syllabus reads like a table of contents with dates set in mono beside each topic. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #16202e;
+  --muted: #5a6575;
+  --rule: #d9dee6;
+  --accent: #2f5bd3;
+  --accent-soft: #e6ecfb;
+  --noise: #9aa6b8;
+  --display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --body: "STIX Two Text", "Cambria", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141c; --surface: #161d28; --ink: #e6eaf1; --muted: #9aa5b6;
+    --rule: #2a3442; --accent: #8fb0ff; --accent-soft: #1d2a45; --noise: #4c5869;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141c; --surface: #161d28; --ink: #e6eaf1; --muted: #9aa5b6;
+  --rule: #2a3442; --accent: #8fb0ff; --accent-soft: #1d2a45; --noise: #4c5869;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 17px; line-height: 1.6;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 72px;
+  display: flex; flex-direction: column; gap: 56px;
+}
+.label {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: 20px; }
+.field {
+  position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 7;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.field canvas { width: 100%; height: 100%; display: block; }
+.field .t {
+  position: absolute; right: 0; bottom: 8px;
+  font-family: var(--mono); font-size: 12px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+h1 {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(42px, 8vw, 72px); line-height: 1.02; margin: 0;
+  text-wrap: balance; letter-spacing: -0.01em;
+}
+h1 em { color: var(--accent); }
+.lede { margin: 0; max-width: 62ch; font-size: 19px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.btn {
+  display: inline-block; background: var(--accent); color: var(--bg);
+  font-family: var(--mono); font-size: 14px; font-weight: 500;
+  padding: 12px 18px; border-radius: 6px; text-decoration: none;
+}
+.btn:hover { filter: brightness(1.08); }
+.deadline { font-family: var(--mono); font-size: 14px; color: var(--muted); }
+.deadline strong { color: var(--ink); font-weight: 500; }
+
+/* Text */
+h2 {
+  font-family: var(--display); font-weight: 400; font-size: 34px;
+  line-height: 1.1; margin: 0; text-wrap: balance;
+}
+section { display: flex; flex-direction: column; gap: 16px; }
+section p { margin: 0; max-width: 65ch; }
+
+.source {
+  display: grid; grid-template-columns: 1fr; gap: 6px;
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 8px;
+  padding: 20px 22px;
+}
+.source .title { font-family: var(--display); font-size: 26px; line-height: 1.15; }
+.source .meta { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+/* Syllabus */
+.part { display: flex; flex-direction: column; }
+.part-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px; flex-wrap: wrap; padding-bottom: 8px; border-bottom: 1px solid var(--ink);
+}
+.part-head h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 24px; }
+.sessions { list-style: none; margin: 0; padding: 0; }
+.session {
+  display: grid; grid-template-columns: 3.2rem minmax(0, 1fr);
+  gap: 4px 20px; padding: 18px 0; border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.num { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--accent); }
+.topic { min-width: 0; }
+.topic .when { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.topic .what { margin-top: 2px; }
+@media (max-width: 620px) { .session { grid-template-columns: 2.6rem minmax(0, 1fr); } }
+.break {
+  font-family: var(--mono); font-size: 13px; color: var(--muted);
+  padding: 14px 0 0; text-align: center;
+}
+
+/* Format list */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 24px; }
+.fact { display: flex; flex-direction: column; gap: 4px; }
+.fact p { font-size: 16px; }
+
+.organizers { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+.person { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.person .name { font-family: var(--display); font-size: 26px; line-height: 1.1; }
+.person .role { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.person p { font-size: 16px; }
+footer { font-family: var(--mono); font-size: 12px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; }
+</style>
+<style>body{margin:0} img{max-width:100%} *,*::before,*::after{box-sizing:border-box}</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div class="field" aria-hidden="true">
+      <canvas id="field"></canvas>
+      <span class="t" id="tlabel">t = 1.00</span>
+    </div>
+    <span class="label">Reading group · Nov 2026 – Feb 2027</span>
+    <h1>Diffusion models, <em>from the stochastic processes up</em></h1>
+    <p class="lede">Eight sessions working through a self-contained mathematical introduction to diffusion models: the continuous-time process theory and Markov chain Monte Carlo (MCMC) background you need, and nothing you don't.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://docs.google.com/document/d/1jJnHK5x3OQrruFfPJwcVUeuM6y6C0u3Ctj_5cTovSVo/edit?usp=sharing" target="_blank" rel="noopener">Sign up</a>
+      <span class="deadline">Sign up by <strong>Fri, Oct 30</strong> · first meeting week of Nov 2</span>
+    </div>
+  </header>
+
+  <section>
+    <span class="label">Why this text</span>
+    <h2>Skip the two prerequisite textbooks</h2>
+    <p>Getting into diffusion models usually means reading a whole textbook on stochastic differential equations (SDEs) and another on MCMC first. These notes are one of the first pedagogical texts to cover the continuous-time process theory and sampling background together, specialized to exactly what diffusion models need.</p>
+    <p>If you want an introduction to diffusion models but don't have a strong background in stochastic processes or MCMC, this is a good entry point.</p>
+    <p>This reading group will loosely follow the text <a href="https://arxiv.org/abs/2607.01693" target="_blank" rel="noopener"><em>A Mathematical Introduction to Diffusion Models</em></a>.</p>
+    <a class="source" href="https://arxiv.org/abs/2607.01693" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+      <span class="label">The notes</span>
+      <span class="title">A Mathematical Introduction to Diffusion Models</span>
+      <span class="meta">Jianfeng Lu · arXiv:2607.01693</span>
+    </a>
+  </section>
+
+  <section>
+    <span class="label">Syllabus</span>
+    <h2>Eight sessions, loosely following the notes</h2>
+
+    <div class="part">
+      <div class="part-head"><h3>Part I · Foundations</h3><span class="label">Nov – Dec</span></div>
+      <ol class="sessions">
+        <li class="session">
+          <span class="num">1</span>
+          <div class="topic"><div class="when">Week of Nov 2</div><div class="what">Langevin dynamics, continuous processes, MCMC, mixing</div></div>
+        </li>
+        <li class="session">
+          <span class="num">2</span>
+          <div class="topic"><div class="when">Week of Nov 9</div><div class="what">Forward and reverse SDEs, Fokker–Planck, Anderson’s equation</div></div>
+        </li>
+        <li class="session">
+          <span class="num">3</span>
+          <div class="topic"><div class="when">Week of Nov 16</div><div class="what">Discretization and error control: step size, Girsanov, time schedules</div></div>
+        </li>
+        <li class="session">
+          <span class="num">4</span>
+          <div class="topic"><div class="when">Week of Dec 1</div><div class="what">Score matching and other objectives, Tweedie’s formula, score estimators</div></div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="break">— winter break —</div>
+
+    <div class="part">
+      <div class="part-head"><h3>Part II · Beyond the basics</h3><span class="label">Jan – Feb</span></div>
+      <ol class="sessions" start="5">
+        <li class="session">
+          <span class="num">5</span>
+          <div class="topic"><div class="when">Week of Jan 25</div><div class="what">Discrete diffusion models</div></div>
+        </li>
+        <li class="session">
+          <span class="num">6</span>
+          <div class="topic"><div class="when">Week of Feb 1</div><div class="what">Inference time I: oracle guidance methods and empirical approximations</div></div>
+        </li>
+        <li class="session">
+          <span class="num">7</span>
+          <div class="topic"><div class="when">Week of Feb 8</div><div class="what">Inference time II: SMC, closed-form guidance, provable guarantees</div></div>
+        </li>
+        <li class="session">
+          <span class="num">8</span>
+          <div class="topic"><div class="when">Week of Feb 15</div><div class="what">Applications: text, images, molecules</div></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <span class="label">How it works</span>
+    <div class="facts">
+      <div class="fact"><h2 style="font-size:24px">Read</h2><p>Before each session, everyone reads the section of the notes for that week’s topic.</p></div>
+      <div class="fact"><h2 style="font-size:24px">Present</h2><p>One of the organizers gives a presentation on the topic to anchor the discussion.</p></div>
+      <div class="fact"><h2 style="font-size:24px">Meet</h2><p>Meeting time is set by a poll sent to everyone who signs up.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="label">Organizers</span>
+    <div class="organizers">
+      <div class="person">
+        <a class="name" href="https://cmcdonald-1.github.io/" target="_blank" rel="noopener">Curtis McDonald</a>
+        <span class="role">Simons Institute · UC Berkeley</span>
+        <p>Postdoctoral researcher at the Simons Institute, hosted by Peter Bartlett and Bin Yu. Works on sampling from multimodal, non-log-concave distributions, diffusion and generative models, and convergence of stochastic processes.</p>
+      </div>
+      <div class="person">
+        <a class="name" href="https://www.mit.edu/~drohatgi" target="_blank" rel="noopener">Dhruv Rohatgi</a>
+        <span class="role">Statistics · UC Berkeley</span>
+        <p>Miller Fellow in the Statistics Department, hosted by Jason Lee. Works on the theoretical foundations of machine learning, especially how simple learning building blocks combine to solve harder problems without errors compounding.</p>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="https://docs.google.com/document/d/1jJnHK5x3OQrruFfPJwcVUeuM6y6C0u3Ctj_5cTovSVo/edit?usp=sharing" target="_blank" rel="noopener">Sign up by Oct 30</a>
+    </div>
+  </section>
+
+  <footer>Header animation: particles run the reverse-time SDE from Gaussian noise (t = 1) to a two-ring target (t = 0).</footer>
+</main>
+
+<script>
+(function () {
+  const canvas = document.getElementById('field');
+  const tlabel = document.getElementById('tlabel');
+  const ctx = canvas.getContext('2d');
+  const N = 900;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Target: points on two concentric rings (data), in normalized coords.
+  const target = [], noise = [];
+  function gauss() { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  for (let i = 0; i < N; i++) {
+    const r = i % 3 === 0 ? 0.42 : 0.9;
+    const a = Math.random() * Math.PI * 2;
+    target.push([r * Math.cos(a) * 1.9 + gauss() * 0.025, r * Math.sin(a) + gauss() * 0.025]);
+    noise.push([gauss(), gauss()]);
+  }
+  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function size() {
+    const dpr = window.devicePixelRatio || 1;
+    const r = canvas.getBoundingClientRect();
+    canvas.width = Math.max(1, r.width * dpr); canvas.height = Math.max(1, r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  // OU interpolation: x_t = a_t x0 + s_t z, with a_t = e^{-4t}, s_t = sqrt(1-a_t^2)
+  function draw(t) {
+    const r = canvas.getBoundingClientRect();
+    const w = r.width, h = r.height;
+    ctx.clearRect(0, 0, w, h);
+    const a = Math.exp(-4 * t), s = Math.sqrt(1 - a * a);
+    const accent = css('--accent'), nz = css('--noise');
+    const scale = h * 0.42;
+    for (let i = 0; i < N; i++) {
+      const x = a * target[i][0] + s * noise[i][0] * 1.4;
+      const y = a * target[i][1] + s * noise[i][1];
+      ctx.fillStyle = i % 2 ? accent : (t > 0.5 ? nz : accent);
+      ctx.globalAlpha = 0.35 + 0.55 * (1 - t);
+      ctx.fillRect(w / 2 + x * scale - 1.2, h / 2 + y * scale - 1.2, 2.4, 2.4);
+    }
+    ctx.globalAlpha = 1;
+    tlabel.textContent = 't = ' + t.toFixed(2);
+  }
+  size();
+  window.addEventListener('resize', () => { size(); if (reduce) draw(0); });
+  if (reduce) { draw(0); return; }
+  draw(0.35);
+  const period = 9000; let start = null;
+  function frame(ts) {
+    if (start === null) start = ts;
+    const u = ((ts - start) % period) / period;
+    // hold noise, denoise, hold data, then re-noise quickly
+    let t;
+    if (u < 0.1) t = 1;
+    else if (u < 0.6) { const k = (u - 0.1) / 0.5; t = 1 - (1 - Math.pow(1 - k, 2)); t = Math.max(0, t); }
+    else if (u < 0.85) t = 0;
+    else t = (u - 0.85) / 0.15;
+    draw(t);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
