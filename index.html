@@ -7,7 +7,6 @@
 <title>Diffusion Models Reading Group</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a single reading column; the hero is a live reverse-diffusion of particles from noise to data; the syllabus reads like a table of contents with dates set in mono beside each topic. */
 :root {
   --bg: #f6f7f9;
   --surface: #ffffff;
@@ -141,31 +140,38 @@ footer { font-family: var(--mono); font-size: 12px; color: var(--muted); border-
       <span class="t" id="tlabel">t = 1.00</span>
     </div>
     <span class="label">Reading group · Nov 2026 – Feb 2027</span>
-    <h1>Diffusion models, <em>from the stochastic processes up</em></h1>
-    <p class="lede">Eight sessions working through a self-contained mathematical introduction to diffusion models: the continuous-time process theory and Markov chain Monte Carlo (MCMC) background you need, and nothing you don't.</p>
+    <h1>Mathematical foundations of diffusion models</h1>
     <div class="cta-row">
-      <a class="btn" href="https://docs.google.com/document/d/1jJnHK5x3OQrruFfPJwcVUeuM6y6C0u3Ctj_5cTovSVo/edit?usp=sharing" target="_blank" rel="noopener">Sign up</a>
-      <span class="deadline">Sign up by <strong>Fri, Oct 30</strong> · first meeting week of Nov 2</span>
+      <a class="btn" href="https://docs.google.com/document/d/1jJnHK5x3OQrruFfPJwcVUeuM6y6C0u3Ctj_5cTovSVo/edit?usp=sharing" target="_blank" rel="noopener">Sign up by Friday, Oct 30</a>
+      <span class="deadline">First meeting will be the week of Nov 2 in Gateway (room/day/time TBD)</span>
     </div>
   </header>
 
   <section>
-    <span class="label">Why this text</span>
-    <h2>Skip the two prerequisite textbooks</h2>
-    <p>Getting into diffusion models usually means reading a whole textbook on stochastic differential equations (SDEs) and another on MCMC first. These notes are one of the first pedagogical texts to cover the continuous-time process theory and sampling background together, specialized to exactly what diffusion models need.</p>
-    <p>If you want an introduction to diffusion models but don't have a strong background in stochastic processes or MCMC, this is a good entry point.</p>
-    <p>This reading group will loosely follow the text <a href="https://arxiv.org/abs/2607.01693" target="_blank" rel="noopener"><em>A Mathematical Introduction to Diffusion Models</em></a>.</p>
-    <a class="source" href="https://arxiv.org/abs/2607.01693" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-      <span class="label">The notes</span>
-      <span class="title">A Mathematical Introduction to Diffusion Models</span>
-      <span class="meta">Jianfeng Lu · arXiv:2607.01693</span>
-    </a>
+    <span class="label">Organizers</span>
+    <div class="organizers">
+      <div class="person">
+        <a class="name" href="https://cmcdonald-1.github.io/" target="_blank" rel="noopener">Curtis McDonald</a>
+        <span class="role">Simons Institute · UC Berkeley</span>
+      </div>
+      <div class="person">
+        <a class="name" href="https://www.mit.edu/~drohatgi" target="_blank" rel="noopener">Dhruv Rohatgi</a>
+        <span class="role">Statistics / Miller Institute · UC Berkeley</span>
+      </div>
+    </div>
+  </section>
+ 
+
+  <section>
+    <span class="label">About</span>
+    <p>In this ``reading group'', we (the organizers) will give a self-contained introduction to the theory behind diffusion models, loosely following the text <a href="https://arxiv.org/abs/2607.01693" target="_blank" rel="noopener"><em>A Mathematical Introduction to Diffusion Models</em></a>. We will introduce the necessary mathematical background as we go (e.g. stochastic processes and PDEs), but will emphasize intuition and algorithmic concepts over full rigor. Later sessions will cover (a selection of) recent developments, including discrete diffusion models and inference-time steering. </p>
+  
+
+    <p> The meeting time will be set by a poll sent to everyone who signs up.</p>
   </section>
 
   <section>
-    <span class="label">Syllabus</span>
-    <h2>Eight sessions, loosely following the notes</h2>
-
+    <span class="label">Tentative syllabus</span>
     <div class="part">
       <div class="part-head"><h3>Part I · Foundations</h3><span class="label">Nov – Dec</span></div>
       <ol class="sessions">
@@ -191,7 +197,7 @@ footer { font-family: var(--mono); font-size: 12px; color: var(--muted); border-
     <div class="break">— winter break —</div>
 
     <div class="part">
-      <div class="part-head"><h3>Part II · Beyond the basics</h3><span class="label">Jan – Feb</span></div>
+      <div class="part-head"><h3>Part II · Assorted topics</h3><span class="label">Jan – Feb</span></div>
       <ol class="sessions" start="5">
         <li class="session">
           <span class="num">5</span>
@@ -213,33 +219,7 @@ footer { font-family: var(--mono); font-size: 12px; color: var(--muted); border-
     </div>
   </section>
 
-  <section>
-    <span class="label">How it works</span>
-    <div class="facts">
-      <div class="fact"><h2 style="font-size:24px">Read</h2><p>Before each session, everyone reads the section of the notes for that week’s topic.</p></div>
-      <div class="fact"><h2 style="font-size:24px">Present</h2><p>One of the organizers gives a presentation on the topic to anchor the discussion.</p></div>
-      <div class="fact"><h2 style="font-size:24px">Meet</h2><p>Meeting time is set by a poll sent to everyone who signs up.</p></div>
-    </div>
-  </section>
 
-  <section>
-    <span class="label">Organizers</span>
-    <div class="organizers">
-      <div class="person">
-        <a class="name" href="https://cmcdonald-1.github.io/" target="_blank" rel="noopener">Curtis McDonald</a>
-        <span class="role">Simons Institute · UC Berkeley</span>
-        <p>Postdoctoral researcher at the Simons Institute, hosted by Peter Bartlett and Bin Yu. Works on sampling from multimodal, non-log-concave distributions, diffusion and generative models, and convergence of stochastic processes.</p>
-      </div>
-      <div class="person">
-        <a class="name" href="https://www.mit.edu/~drohatgi" target="_blank" rel="noopener">Dhruv Rohatgi</a>
-        <span class="role">Statistics · UC Berkeley</span>
-        <p>Miller Fellow in the Statistics Department, hosted by Jason Lee. Works on the theoretical foundations of machine learning, especially how simple learning building blocks combine to solve harder problems without errors compounding.</p>
-      </div>
-    </div>
-    <div class="cta-row">
-      <a class="btn" href="https://docs.google.com/document/d/1jJnHK5x3OQrruFfPJwcVUeuM6y6C0u3Ctj_5cTovSVo/edit?usp=sharing" target="_blank" rel="noopener">Sign up by Oct 30</a>
-    </div>
-  </section>
 
   <footer>Header animation: particles run the reverse-time SDE from Gaussian noise (t = 1) to a two-ring target (t = 0).</footer>
 </main>
