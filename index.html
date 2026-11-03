@@ -112,6 +112,8 @@ section p { margin: 0; max-width: 65ch; }
 .topic { min-width: 0; }
 .topic .when { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .topic .what { margin-top: 2px; }
+.topic .links { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px 16px;
+  font-family: var(--mono); font-size: 13px; }
 @media (max-width: 620px) { .session { grid-template-columns: 2.6rem minmax(0, 1fr); } }
 .break {
   font-family: var(--mono); font-size: 13px; color: var(--muted);
@@ -177,7 +179,9 @@ footer { font-family: var(--mono); font-size: 12px; color: var(--muted); border-
       <ol class="sessions">
         <li class="session">
           <span class="num">1</span>
-          <div class="topic"><div class="when">Friday November 6, 9am-10am Gateway 3355</div><div class="what">Langevin dynamics, continuous processes, MCMC, mixing</div></div>
+          <div class="topic"><div class="when">Friday November 6, 9am-10am Gateway 3355</div><div class="what">Langevin dynamics, continuous processes, MCMC, mixing</div></div><div class="links">
+      <a href="assets/curtis_seminar_presentation_03_22_2023.pdf" target="_blank" rel="noopener">Slides (PDF)</a>
+    </div>
         </li>
         <li class="session">
           <span class="num">2</span>
